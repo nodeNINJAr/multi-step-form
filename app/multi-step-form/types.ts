@@ -12,7 +12,7 @@ export type FormData = {
         zipCode: string;
       };
       account: {
-        username: string;
+        userName: string;
         password: string;
         confirmPassword: string;
       };

@@ -12,7 +12,6 @@ type FormNavigationProps = {
 
 // form navigation
 const FormNavigation = ({currentStep, onNext, onPrev, isSubmitting}:FormNavigationProps) => {
-
    // 
   return (
     <div className='mt-6'>
