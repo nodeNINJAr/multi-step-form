@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { FormStep } from '../types';
+import { FormData, FormStep } from '../types';
 import { useFormContext } from 'react-hook-form';
 import { redirect } from 'next/navigation';
 import { useMutation } from '@tanstack/react-query';
@@ -15,14 +15,14 @@ type FormNavigationProps = {
 
 // form navigation
 const FormNavigation = ({currentStep, onNext, onPrev}:FormNavigationProps) => {
-    const { watch, formState: { isValid } } = useFormContext();
+    const { watch, formState: { isValid } } = useFormContext<FormData>();
     const formValues = watch();
     const [isLoading, setIsLoading] = useState(false);
     //  
     const {
       personal = { fullName: '', email: '', phoneNumber: '' },
       address = { streetAddress: '', city: '', zipCode: '' },
-      account = { username: '', password: '', confirmPassword: '' }
+      account = { userName: '', password: '', confirmPassword: '' }
     } = formValues || {}
 
   //   
@@ -33,7 +33,7 @@ const FormNavigation = ({currentStep, onNext, onPrev}:FormNavigationProps) => {
       case 'address':
         return !!address.streetAddress && !!address.city && !!address.zipCode
       case 'account':
-        return !!account.userName && !!account.password && !!account.confirmPassword
+        return !! account.userName && !!account.password && !!account.confirmPassword
       default:
         return true
     }
@@ -41,8 +41,8 @@ const FormNavigation = ({currentStep, onNext, onPrev}:FormNavigationProps) => {
 
   // 
   const mutation = useMutation({
-    mutationFn: (formValues:any) => {
-      return axios.post('/api/submit', formValues);
+    mutationFn: (formValues: FormData) => {
+      return axios.post<{ success: boolean }>('/api/submit', formValues);
     },
     onMutate: () => {
       setIsLoading(true);
@@ -62,7 +62,7 @@ const FormNavigation = ({currentStep, onNext, onPrev}:FormNavigationProps) => {
   // post a info
   const handlePostInfo = async () => {
     if (!isValid) return;
-    const data = await mutation.mutateAsync(formValues);
+     await mutation.mutateAsync(formValues);
   };
 
   // 

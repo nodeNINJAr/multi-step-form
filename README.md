@@ -1,8 +1,8 @@
 
-
-```markdown
 # 🧾 Multi-Step Form (Next.js + React Hook Form + Zod)
-![Multi-Step Form Screenshot](https://i.ibb.co.com/xtytWNBw/Screenshot-23.png)
+<img src="https://i.ibb.co.com/xtytWNBw/Screenshot-23.png"/>
+
+---
 
 A dynamic, animated multi-step form built using **Next.js**, **React Hook Form**, **Zod**, and **Framer Motion**. Designed for modern web applications, this project supports form validation, API submission with Axios, and MongoDB integration for data persistence. State management is powered by **React Query** for optimal performance.
 
@@ -10,28 +10,15 @@ A dynamic, animated multi-step form built using **Next.js**, **React Hook Form**
 
 ## 📋 Table of Contents
 
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Configuration](#configuration)
-- [Dependencies](#dependencies)
-- [Examples](#examples)
-- [Troubleshooting](#troubleshooting)
-- [Contributors](#contributors)
-- [License](#license)
-
----
-
-## 🚀 Features
-
-- 🔄 Multi-step form flow
-- ✅ Zod schema-based form validation
-- 🎬 Smooth transitions with Framer Motion
-- 🔌 API calls using Axios
-- ⚡ Global state management via React Query
-- 🧠 MongoDB database integration
-- ♻️ Reusable and modular components
-- 📱 Fully responsive and accessible
+- [🧾 Multi-Step Form (Next.js + React Hook Form + Zod)](#-multi-step-form-nextjs--react-hook-form--zod)
+  - [📋 Table of Contents](#-table-of-contents)
+  - [🛠 Installation](#-installation)
+  - [▶️ Usage](#️-usage)
+  - [⚙️ Configuration](#️-configuration)
+  - [📦 Dependencies](#-dependencies)
+  - [🧪 Examples](#-examples)
+  - [🧯 Troubleshooting](#-troubleshooting)
+  - [👥 Contributors](#-contributors)
 
 ---
 
