@@ -1,6 +1,6 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod';
 import { FormProvider, useForm } from 'react-hook-form'
 import { FormData } from './types'
@@ -19,11 +19,13 @@ import { motion } from "motion/react"
 const MultiStepForm = () => {
 // 
 const {currentStep, handleNext, handlePrev, direction} = useMultiStepForm();
+const [formData, setFormData] = useState({});
+console.log(formData);
 
 //react hook form
 const methods = useForm<FormData>({
         resolver: zodResolver(formSchema),
-        mode: 'onChange',
+        mode: 'onSubmit',
         defaultValues: {
           personal: {
             fullName: '',
@@ -44,9 +46,23 @@ const methods = useForm<FormData>({
       })
 
   // form submittion function 
-  const onSubmit = (data:FormData)=>{
-    console.log(data,"data is here") 
+  const onSubmit = async(data:FormData)=>{
+       await setFormData(data)
+    // console.log(data,"data is here");
+    const res = await fetch('http://localhost:3000/api/submit',{
+      method:"POST",
+      body:JSON.stringify(data)
+    });
+    const postRes = await res.json()
+    console.log(postRes);
   }
+// handle submit
+// const handleSubmit=()=>{
+    
+// }
+
+
+
 
 // form step
  const renderStep =()=>{
@@ -83,8 +99,8 @@ const methods = useForm<FormData>({
 
   // 
   return (
-    <div className='mx-auto w-full bg-gray-500 p-2 min-h-screen flex justify-center items-center'>
-        <div className='bg-white w-2/5 mx-auto p-8 rounded-2xl overflow-hidden'>
+    <div className='mx-auto w-full bg-gray-500 p-2 min-h-screen flex justify-center items-center text-gray-700'>
+        <div className='bg-white w-2/5 mx-auto p-8 rounded-2xl overflow-hidden border-t-2 border-teal-600'>
           <h1 className='text-3xl text-center capitalize mb-8 font-bold'>Multi step form</h1>
          {/* form */}
            <FormProvider {...methods}>
@@ -100,6 +116,7 @@ const methods = useForm<FormData>({
                      transition={{ type: 'tween', ease: 'easeInOut', duration: 0.5 }}
                      className="overflow-hidden"
                    >
+                    {/*forms */}
                      {renderStep()} 
                    </motion.div>
                </AnimatePresence>

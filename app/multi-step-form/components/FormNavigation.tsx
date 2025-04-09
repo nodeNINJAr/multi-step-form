@@ -22,7 +22,6 @@ const FormNavigation = ({currentStep, onNext, onPrev, isSubmitting}:FormNavigati
       account = { username: '', password: '', confirmPassword: '' }
     } = formValues || {}
 
-  console.log(personal,address,account);
   //   
   const isCurrentStepComplete = () => {
     switch (currentStep) {
@@ -59,7 +58,7 @@ const FormNavigation = ({currentStep, onNext, onPrev, isSubmitting}:FormNavigati
         </button>):(
              <button
              type="submit"
-             disabled={isSubmitting || !isValid}
+             disabled={isSubmitting ||!isValid}
              className="cursor-pointer rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 disabled:opacity-50"
            >
              {isSubmitting ? 'Submitting...' : 'Submit'}
