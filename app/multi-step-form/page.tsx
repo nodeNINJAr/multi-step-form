@@ -93,7 +93,7 @@ const methods = useForm<FormData>({
   return (
     <div className='dark:text-gray-300 mx-auto w-full bg-gradient-to-r from-gray-300 via-gray-500 to-gray-700 px-6 py-4 sm:p-2 min-h-screen flex justify-center items-center text-gray-300'>
          <div className='absolute right-2 top-2'> <ThemeToggle/></div>
-        <div className='bg-white dark:bg-gray-700 w-full xs:w-4/5 sm:w-3/5 lg:w-2/5 mx-auto p-8 rounded-2xl overflow-hidden border-t-2 border-teal-600'>
+        <div className='bg-white dark:bg-gray-700 w-full xs:w-4/5 sm:w-3/5 lg:max-w-xl mx-auto p-8 rounded-2xl overflow-hidden border-t-2 border-teal-600'>
           <h1 className='text-3xl text-center capitalize mb-8 font-bold text-gray-500 dark:text-gray-200'>Multi step form</h1>
          {/* form */}
            <FormProvider {...methods}>

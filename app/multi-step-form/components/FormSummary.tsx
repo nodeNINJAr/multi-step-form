@@ -21,7 +21,7 @@ const FormSummary = () => {
              <p>Zip Code: {allValues.address?.zipCode}</p>
              {/*  */}
              <h3 className='text-lg font-semibold border-b border-gray-500 mb-2 text-gray-700 dark:text-gray-300'>Account Setup</h3>
-             <p>Username: {allValues.account?.userName}</p> 
+             <p>User Name: {allValues.account?.userName}</p> 
              <p>Password: {allValues.account?.password}</p>
              <p>Confirm Password: {allValues.account?.confirmPassword}</p>
           </div>

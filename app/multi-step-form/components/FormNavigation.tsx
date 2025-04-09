@@ -63,7 +63,6 @@ const FormNavigation = ({currentStep, onNext, onPrev}:FormNavigationProps) => {
   const handlePostInfo = async () => {
     if (!isValid) return;
     const data = await mutation.mutateAsync(formValues);
-    console.log(data);
   };
 
   // 
@@ -77,7 +76,7 @@ const FormNavigation = ({currentStep, onNext, onPrev}:FormNavigationProps) => {
          {currentStep !== "submited" && currentStep !== "personal"  && <button
           type="button"
           onClick={onPrev}
-          className="mr-2 cursor-pointer rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300"
+          className="mr-2 cursor-pointer rounded-md bg-gray-200 px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-300"
         >
           Previous
         </button>}
@@ -97,8 +96,14 @@ const FormNavigation = ({currentStep, onNext, onPrev}:FormNavigationProps) => {
               <button
                 type="button"
                 onClick={onNext}
-                disabled={!isCurrentStepComplete()}
-                className="cursor-pointer rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+                disabled={!isCurrentStepComplete() || account?.password !== account.confirmPassword}
+                className={`
+                  rounded-md px-4 py-2 text-sm font-semibold text-gray-100
+                  ${!isCurrentStepComplete() || account?.password !== account.confirmPassword 
+                    ? "cursor-not-allowed opacity-75 bg-gray-200 text-gray-500" 
+                    : "cursor-pointer bg-indigo-600 hover:bg-indigo-700 dark:bg-indigo-700 dark:hover:bg-indigo-600"
+                  }
+                `}
               >
                 Next
               </button>):(
@@ -106,7 +111,7 @@ const FormNavigation = ({currentStep, onNext, onPrev}:FormNavigationProps) => {
                   onClick={handlePostInfo}
                   type="submit"
                   disabled={isLoading ||!isValid}
-                  className="cursor-pointer rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 disabled:opacity-50"
+                  className="cursor-pointer rounded-md bg-green-600 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700 disabled:opacity-50"
                 >
                   {isLoading ? 'Submitting...' : 'Submit'}
                 </button>
