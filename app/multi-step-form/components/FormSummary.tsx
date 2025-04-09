@@ -1,8 +1,31 @@
 import React from 'react'
+import { useFormContext } from 'react-hook-form'
 
 const FormSummary = () => {
+  const {watch} = useFormContext(); 
+   const allValues = watch();
+   
+  // 
   return (
-    <div>FormSummary</div>
+    <div className='text-black'>
+          <h1 className='text-3xl text-center font-semibold font-sans mb-6'>Form summary</h1>
+          {/*  */}
+          <div>
+            <h3 className='text-lg font-semibold border-b border-gray-500 mb-2'>Personal Information</h3>
+            <p>Name: {allValues.personal?.fullName}</p>
+            <p>Email: {allValues.personal?.email}</p>
+            <p>Phone: {allValues.personal?.phoneNumber}</p>
+            <h3 className='text-lg font-semibold border-b border-gray-500 mb-2'>Address Details</h3>
+             <p>Street Address: {allValues.address?.streetAddress}</p> 
+             <p>City: {allValues.address?.city}</p>
+             <p>Zip Code: {allValues.address?.zipCode}</p>
+             {/*  */}
+             <h3 className='text-lg font-semibold border-b border-gray-500 mb-2'>Account Setup</h3>
+             <p>Username: {allValues.account?.userName}</p> 
+             <p>Password: {allValues.account?.password}</p>
+             <p>Confirm Password: {allValues.account?.confirmPassword}</p>
+          </div>
+    </div>
   )
 }
 
