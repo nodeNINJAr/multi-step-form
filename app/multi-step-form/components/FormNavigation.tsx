@@ -63,6 +63,7 @@ const FormNavigation = ({currentStep, onNext, onPrev}:FormNavigationProps) => {
   const handlePostInfo = async () => {
     if (!isValid) return;
     const data = await mutation.mutateAsync(formValues);
+    console.log(data);
   };
 
   // 
