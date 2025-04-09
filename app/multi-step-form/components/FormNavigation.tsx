@@ -1,21 +1,24 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { FormStep } from '../types';
 import { useFormContext } from 'react-hook-form';
+import { redirect } from 'next/navigation';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
 
 // 
 type FormNavigationProps = {
     currentStep: FormStep;
     onNext: () => void;
     onPrev: () => void;
-    isSubmitting?: boolean;
   };
 
 
 // form navigation
-const FormNavigation = ({currentStep, onNext, onPrev, isSubmitting}:FormNavigationProps) => {
-    const { watch, formState: { isValid } } = useFormContext()
-    const formValues = watch()
-  
+const FormNavigation = ({currentStep, onNext, onPrev}:FormNavigationProps) => {
+    const { watch, formState: { isValid } } = useFormContext();
+    const formValues = watch();
+    const [isLoading, setIsLoading] = useState(false);
+    //  
     const {
       personal = { fullName: '', email: '', phoneNumber: '' },
       address = { streetAddress: '', city: '', zipCode: '' },
@@ -36,34 +39,80 @@ const FormNavigation = ({currentStep, onNext, onPrev, isSubmitting}:FormNavigati
     }
   }
 
+  // 
+  const mutation = useMutation({
+    mutationFn: (formValues:any) => {
+      return axios.post('/api/submit', formValues);
+    },
+    onMutate: () => {
+      setIsLoading(true);
+    },
+    onSuccess: () => {
+      onNext(); 
+    },
+    onError: (error) => {
+      console.error('Submission error:', error);
+      alert('Error submitting form. Please try again.');
+    },
+    onSettled: () => {
+      setIsLoading(false);
+    },
+  });
+  
+  // post a info
+  const handlePostInfo = async () => {
+    if (!isValid) return;
+    const data = await mutation.mutateAsync(formValues);
+  };
 
+  // 
+  const backToHome=()=>{
+     redirect('/')
+  }
+   
    // 
   return (
     <div className='mt-6'>
-         {currentStep !== "personal" && <button
+         {currentStep !== "submited" && currentStep !== "personal"  && <button
           type="button"
           onClick={onPrev}
           className="mr-2 cursor-pointer rounded-md bg-gray-200 px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-300"
         >
           Previous
         </button>}
-        {currentStep !== 'summary' ? (
-        <button
-          type="button"
-          onClick={onNext}
-          disabled={!isCurrentStepComplete()}
-          className="cursor-pointer rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
-        >
-          Next
-        </button>):(
-             <button
-             type="submit"
-             disabled={isSubmitting ||!isValid}
+
+        {/*  */}
+        {currentStep ==="submited"?
+          <button
+             onClick={backToHome}
+             type="button"
              className="cursor-pointer rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 disabled:opacity-50"
            >
-             {isSubmitting ? 'Submitting...' : 'Submit'}
+              Back To Home
            </button>
-        )} 
+            :  
+            <>
+              {currentStep !== 'summary' ? (
+              <button
+                type="button"
+                onClick={onNext}
+                disabled={!isCurrentStepComplete()}
+                className="cursor-pointer rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700"
+              >
+                Next
+              </button>):(
+                  <button
+                  onClick={handlePostInfo}
+                  type="submit"
+                  disabled={isLoading ||!isValid}
+                  className="cursor-pointer rounded-md bg-green-600 px-4 py-2 text-sm font-medium text-white hover:bg-green-700 disabled:opacity-50"
+                >
+                  {isLoading ? 'Submitting...' : 'Submit'}
+                </button>
+              )} 
+         </>
+      }
+        
     </div>
   )
 }

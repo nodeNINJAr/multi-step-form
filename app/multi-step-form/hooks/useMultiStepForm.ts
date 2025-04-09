@@ -10,7 +10,7 @@ const useMultiStepForm = () => {
   const handleNext =()=>{
      setDirection("forward")
     // form steps array
-    const steps: FormStep[] = ['personal', 'address', 'account', 'summary'];
+    const steps: FormStep[] = ['personal', 'address', 'account', 'summary','submited'];
     const currentIndex = steps.indexOf(currentStep);
     // 
     if(currentIndex < steps.length){
@@ -21,7 +21,7 @@ const useMultiStepForm = () => {
   const handlePrev =()=>{
     setDirection("backward")
        // form steps array
-    const steps: FormStep[] = ['personal', 'address', 'account', 'summary'];
+    const steps: FormStep[] = ['personal', 'address', 'account', 'summary','submited'];
     const currentIndex = steps.indexOf(currentStep);
     // 
     if(currentIndex > 0){

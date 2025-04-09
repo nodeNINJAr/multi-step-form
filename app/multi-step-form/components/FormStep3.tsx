@@ -10,6 +10,7 @@ const { register, formState: { errors },
   // 
   return (
     <div className="space-y-4">
+      <h1 className='text-2xl text-center font-semibold font-sans mb-6'>Account Setup</h1>
           <div>
             <label className="block text-sm font-medium text-gray-700">Username (required, min 4 characters)</label>
             <input

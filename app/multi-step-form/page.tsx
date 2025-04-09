@@ -13,6 +13,7 @@ import FormSummary from './components/FormSummary'
 import { formSchema } from './schema'
 import { AnimatePresence } from 'framer-motion';
 import { motion } from "motion/react"
+import FormSubmIted from './components/FormSubmIted';
 
 
 // main form
@@ -47,19 +48,9 @@ const methods = useForm<FormData>({
 
   // form submittion function 
   const onSubmit = async(data:FormData)=>{
-       await setFormData(data)
-    // console.log(data,"data is here");
-    const res = await fetch('http://localhost:3000/api/submit',{
-      method:"POST",
-      body:JSON.stringify(data)
-    });
-    const postRes = await res.json()
-    console.log(postRes);
+      setFormData(data)
+
   }
-// handle submit
-// const handleSubmit=()=>{
-    
-// }
 
 
 
@@ -75,6 +66,8 @@ const methods = useForm<FormData>({
             return <FormStep3/>;
          case 'summary' :
             return <FormSummary/>;
+            case 'submited' :
+              return <FormSubmIted/>;  
          default :
             return null;
      }
@@ -121,7 +114,7 @@ const methods = useForm<FormData>({
                    </motion.div>
                </AnimatePresence>
                 {/* navigation */}
-                <FormNavigation isSubmitting={methods.formState.isSubmitting} currentStep={currentStep} onNext={handleNext} onPrev={handlePrev}/>
+                <FormNavigation currentStep={currentStep} onNext={handleNext} onPrev={handlePrev}/>
             </form>
            </FormProvider>
         </div>

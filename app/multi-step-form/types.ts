@@ -19,4 +19,4 @@ export type FormData = {
 
 }
 
-export type FormStep = 'personal' | 'address' | 'account' | 'summary';
+export type FormStep = 'personal' | 'address' | 'account' | 'summary' | 'submited';

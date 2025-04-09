@@ -13,6 +13,7 @@ const FormStep1 = () => {
     //   
       return (
         <div className="space-y-4">
+           <h1 className='text-2xl text-center font-semibold font-sans mb-6'>Personal Information</h1>
           <div>
             <label className="block text-sm font-medium text-gray-700">Full Name</label>
             <input

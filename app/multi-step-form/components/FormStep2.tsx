@@ -11,6 +11,7 @@ const { register, formState: { errors },
     // 
   return ( 
    <div className="space-y-4">
+     <h1 className='text-2xl text-center font-semibold font-sans mb-6'>Address Details</h1>
     {/*  */}
      <div>
        <label className="block text-sm font-medium text-gray-700">Street Address (required)</label>
