@@ -5,8 +5,10 @@ const useMultiStepForm = () => {
 
  // 
  const [currentStep, setCurrentStep] = useState<FormStep>("personal");
+ const [direction, setDirection] = useState<"forward" | "backward">("forward")
   //next function
   const handleNext =()=>{
+     setDirection("forward")
     // form steps array
     const steps: FormStep[] = ['personal', 'address', 'account', 'summary'];
     const currentIndex = steps.indexOf(currentStep);
@@ -17,6 +19,7 @@ const useMultiStepForm = () => {
   } 
   // prev function
   const handlePrev =()=>{
+    setDirection("backward")
        // form steps array
     const steps: FormStep[] = ['personal', 'address', 'account', 'summary'];
     const currentIndex = steps.indexOf(currentStep);
@@ -28,7 +31,7 @@ const useMultiStepForm = () => {
 
 
   // 
-  return {currentStep, handleNext, handlePrev}
+  return {currentStep, handleNext, handlePrev, direction}
 }
 
 export default useMultiStepForm
